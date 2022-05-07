@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 import playerModel from '../Models/player'
 import multer from "multer";
+const upload = multer({ dest: 'uploads/' })
 const route=Router();
 
 route.get('/',async(req:express.Request,res:express.Response)=>{
@@ -12,41 +13,39 @@ route.get('/',async(req:express.Request,res:express.Response)=>{
       res.json(error);
   }
 })
-route.post('/',async(req:express.Request,res:express.Response)=>{
-    const {id,firstname,lastname,dob,position,salary,image}=req.body;
-    const PlayerModel=new playerModel( {
-            id,
-            firstname,
-            lastname,
-            dob,
-            position,
-            salary,
-            image
-        })
+route.post('/',upload.single('image'),async(req:express.Request,res:express.Response)=>{
+   const {id,firstname,lastname,dob,position,salary}=req.body;
+    const image=req.file;
     try {
-        const newPlayer= await PlayerModel.save();
-        res.json(newPlayer);
+    const PlayerModel=new playerModel( {id, firstname, lastname, dob, position,salary, image })
+       const newPlayer= await PlayerModel.save();
+    res.json(newPlayer);
     } catch (error) {
-
        res.json(error); 
     }
     
 })
 
-route.put('/',async(req:express.Request,res:express.Response)=>{
+route.put('/:id',async(req:express.Request,res:express.Response)=>{
+    const {id,firstname,lastname,dob,position,salary}=req.body;
+    const image=req.file;
     try {
-        
+        const PlayerModel=new playerModel( {id, firstname, lastname, dob, position,salary, image })
+        const newPlayer= await PlayerModel.update(PlayerModel);
+     res.json(newPlayer);
     } catch (error) {
         res.status(500).json(error)
     }
     
 })
 
-route.delete('/',async(req:express.Request,res:express.Response)=>{
+route.delete('/:id',async(req:express.Request,res:express.Response)=>{
     try {
-        
-    } catch (error) {
-        res.status(500).json(error)
+      await playerModel.remove();
+
+        res.json({message:"successful"})
+    } catch (err) {
+        res.status(500).json({err})
     }
     
 })

@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const player_1 = __importDefault(require("../Models/player"));
+const multer_1 = __importDefault(require("multer"));
+const upload = (0, multer_1.default)({ dest: 'uploads/' });
 const route = (0, express_1.Router)();
 route.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -24,18 +26,11 @@ route.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.json(error);
     }
 }));
-route.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id, firstname, lastname, dob, position, salary, image } = req.body;
-    const PlayerModel = new player_1.default({
-        id,
-        firstname,
-        lastname,
-        dob,
-        position,
-        salary,
-        image
-    });
+route.post('/', upload.single('image'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, firstname, lastname, dob, position, salary } = req.body;
+    const image = req.file;
     try {
+        const PlayerModel = new player_1.default({ id, firstname, lastname, dob, position, salary, image });
         const newPlayer = yield PlayerModel.save();
         res.json(newPlayer);
     }
@@ -43,18 +38,25 @@ route.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.json(error);
     }
 }));
-route.put('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+route.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, firstname, lastname, dob, position, salary } = req.body;
+    const image = req.file;
     try {
+        const PlayerModel = new player_1.default({ id, firstname, lastname, dob, position, salary, image });
+        const newPlayer = yield PlayerModel.update(PlayerModel);
+        res.json(newPlayer);
     }
     catch (error) {
         res.status(500).json(error);
     }
 }));
-route.delete('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+route.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        yield player_1.default.remove();
+        res.json({ message: "successful" });
     }
-    catch (error) {
-        res.status(500).json(error);
+    catch (err) {
+        res.status(500).json({ err });
     }
 }));
 exports.default = route;

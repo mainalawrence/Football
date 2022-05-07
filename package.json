@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@types/mongoose": "^5.11.97",
-    "multer": "^1.4.4"
-  }
-}

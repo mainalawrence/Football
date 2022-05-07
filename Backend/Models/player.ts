@@ -9,7 +9,7 @@ const playerModel = new Schema({
   dob: Date,
   position:String,
   salary:String,
-  image:{type:Buffer, data: Buffer, contentType: String }
+  image:{type:Buffer, data: Buffer}
 });
 
 

@@ -13,6 +13,6 @@ const playerModel = new Schema({
     dob: Date,
     position: String,
     salary: String,
-    image: { type: Buffer, data: Buffer, contentType: String }
+    image: { type: Buffer, data: Buffer }
 });
 exports.default = mongoose_1.default.model('playerModel', playerModel);
