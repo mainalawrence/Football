@@ -1,12 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import  {AddPlayerComponent} from './add-player/add-player.component'
+import  {PlayerlistComponent} from './playerlist/playerlist.component'
+import  {UpdatePlayerComponent} from './update-player/update-player.component'
 
+
+
+document.title="Manchester United";
 describe('AppComponent', () => {
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+       
       ],
       declarations: [
         AppComponent

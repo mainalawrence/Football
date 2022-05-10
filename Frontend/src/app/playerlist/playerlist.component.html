@@ -1,0 +1,19 @@
+<div class="container-fluid" >
+   <div class="container  " *ngFor="let item of data">
+        <div class="card">
+            <div class="card-image">
+               <img src="./../../../../../../Downloads/ronando.jpeg"/>
+            </div>
+            <div class="card-details">
+                <p>Name:{{item.firstname+" "+item.lastname}}</p>
+                <p>DOB:{{item.dob}}</p>
+                <p>Position:{{item.position}}</p>
+                <p>Salary:{{item.salary}}</p>
+            </div>
+            <div class="btn-group">
+            <button (click)="HandleDelete(item._id)" class=" btn">Delete</button>
+            </div>
+            </div>
+   </div>
+</div>
+

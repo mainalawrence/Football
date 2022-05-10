@@ -1,0 +1,20 @@
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.container{
+    width: 50%;
+    margin: auto;
+    padding-top: 1%;
+}
+input{
+    width: 80%;
+    margin: auto;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+input:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}

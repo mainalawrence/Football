@@ -3,13 +3,12 @@ const Schema = mongoose.Schema;
 //const ObjectId = Schema.ObjectId;
 
 const playerModel = new Schema({
-  id: String,
   firstname: String,
   lastname: String,
-  dob: Date,
+  dob: String,
   position:String,
   salary:String,
-  image:{type:Buffer, data: Buffer}
+  image:String
 });
 
 
