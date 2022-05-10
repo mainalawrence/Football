@@ -9,6 +9,7 @@ const playerModel = new Schema({
   position:String,
   salary:String,
   image:String
+  
 });
 
 

@@ -29,17 +29,18 @@ route.post('/',upload.single('image'),async (req,res)=>{
         }  
 })
 
-route.put('/:id',async(req:express.Request,res:express.Response)=>{
-    const {_id,firstname,lastname,dob,position,salary}=req.body;
-    const image=req.file;
-    try {
-        const PlayerModel=new playerModel( {_id, firstname, lastname, dob, position,salary, image })
-        const newPlayer= await PlayerModel.update(PlayerModel);
-     res.json(newPlayer);
+route.put('/:id',upload.single('image'),async(req:express.Request,res:express.Response)=>{
+    const {firstname,lastname,dob,position,salary}=JSON.parse(req.body.data);
+    const image=req.file?.filename;
 
-    } catch (error) {
-        res.status(500).json(error)
-    }
+    try {
+        const PlayerModel={firstname, lastname, dob, position,salary ,image};        
+        const newPlayer= await playerModel.updateOne({_id:req.params.id},PlayerModel);
+        res.json(newPlayer);
+        } catch (error) {
+            console.log("Error: "+error);
+           res.json(error); 
+        }  
     
 })
 

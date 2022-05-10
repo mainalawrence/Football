@@ -2,11 +2,11 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.__esModule = true;
-var mongoose_1 = __importDefault(require("mongoose"));
-var Schema = mongoose_1["default"].Schema;
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const Schema = mongoose_1.default.Schema;
 //const ObjectId = Schema.ObjectId;
-var playerModel = new Schema({
+const playerModel = new Schema({
     firstname: String,
     lastname: String,
     dob: String,
@@ -14,4 +14,4 @@ var playerModel = new Schema({
     salary: String,
     image: String
 });
-exports["default"] = mongoose_1["default"].model('playerModel', playerModel);
+exports.default = mongoose_1.default.model('playerModel', playerModel);
