@@ -26,12 +26,12 @@ route.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.json(error);
     }
 }));
-route.post('/', upload.single('image'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const { firstname, lastname, dob, position, salary } = JSON.parse(req.body.data);
-    const image = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
+route.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //rushingyards,touchdowns,sacks,madeGoals,missedGoals,catches,
+    // const {firstname,lastname,dob,position,salary,rushingyards,touchdowns,sacks,madeGoals,missedGoals,catches,
+    // }=JSON.parse(req.body.data);
     try {
-        const PlayerModel = new player_1.default({ firstname, lastname, dob, position, salary, image });
+        const PlayerModel = new player_1.default(req.body.data);
         const newPlayer = yield PlayerModel.save();
         res.json(newPlayer);
         console.log(newPlayer);
@@ -42,9 +42,9 @@ route.post('/', upload.single('image'), (req, res) => __awaiter(void 0, void 0, 
     }
 }));
 route.put('/:id', upload.single('image'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _b;
+    var _a;
     const { firstname, lastname, dob, position, salary } = JSON.parse(req.body.data);
-    const image = (_b = req.file) === null || _b === void 0 ? void 0 : _b.filename;
+    const image = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
     try {
         const PlayerModel = { firstname, lastname, dob, position, salary, image };
         const newPlayer = yield player_1.default.updateOne({ _id: req.params.id }, PlayerModel);

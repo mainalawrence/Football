@@ -14,12 +14,14 @@ route.get('/',async(req:express.Request,res:express.Response)=>{
       res.json(error);
   }
 })
-route.post('/',upload.single('image'),async (req,res)=>{
-    const {firstname,lastname,dob,position,salary}=JSON.parse(req.body.data);
-    const image=req.file?.filename;
-    try {
+route.post('/',async (req,res)=>{
+//rushingyards,touchdowns,sacks,madeGoals,missedGoals,catches,
 
-        const PlayerModel=new playerModel({firstname, lastname, dob, position,salary ,image})
+   // const {firstname,lastname,dob,position,salary,rushingyards,touchdowns,sacks,madeGoals,missedGoals,catches,
+   // }=JSON.parse(req.body.data);
+
+    try {
+        const PlayerModel=new playerModel(req.body.data);
         const newPlayer= await PlayerModel.save();
         res.json(newPlayer);
         console.log(newPlayer);
@@ -31,6 +33,7 @@ route.post('/',upload.single('image'),async (req,res)=>{
 
 route.put('/:id',upload.single('image'),async(req:express.Request,res:express.Response)=>{
     const {firstname,lastname,dob,position,salary}=JSON.parse(req.body.data);
+    
     const image=req.file?.filename;
 
     try {
@@ -43,7 +46,6 @@ route.put('/:id',upload.single('image'),async(req:express.Request,res:express.Re
         }  
     
 })
-
 route.delete('/:id',async(req:express.Request,res:express.Response)=>{
     try {
       await playerModel.remove();

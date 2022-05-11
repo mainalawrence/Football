@@ -11,7 +11,6 @@ const db=mongoose.connection;
 db.on('error',(error)=>console.error("db error"+error));
 db.once('open', ()=>console.log("db connectd"));
 
-
 //import multer from 'multer'
 const App=express();
 App.use(cors());

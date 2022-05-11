@@ -12,6 +12,11 @@ const playerModel = new Schema({
     dob: String,
     position: String,
     salary: String,
-    image: String
+    rushingyards: Number,
+    touchdowns: Number,
+    sacks: Number,
+    madeGoals: Number,
+    missedGoals: Number,
+    catches: Number,
 });
 exports.default = mongoose_1.default.model('playerModel', playerModel);

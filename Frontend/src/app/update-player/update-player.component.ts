@@ -15,6 +15,7 @@ export class UpdatePlayerComponent implements OnInit {
     fetch(`http://localhost:2000/${value._id}`,{
       method: 'PUT',
       mode: 'cors',
+      body:JSON.stringify(value)
   }).then(res=>{
       console.log(res); 
   })

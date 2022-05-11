@@ -24,7 +24,7 @@ export class AddPlayerComponent implements OnInit {
  fetch(`http://localhost:2000/`,{
   method:'POST',
   mode: 'cors',
-  body:this.formData
+  body:JSON.stringify(value)
  })
  .then(res=>{
    return res.json();
